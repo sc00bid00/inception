@@ -17,7 +17,7 @@ RUN apk --no-cache add mariadb mariadb-client && \
 RUN mysql_install_db --user=mysql --ldata=/var/lib/mysql
 
 # Start MariaDB
-CMD ["mysqld_safe"]
+# CMD ["mysqld_safe"]
 
 # Expose the MariaDB port
 EXPOSE 3306

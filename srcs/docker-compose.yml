@@ -1,0 +1,35 @@
+
+
+version: "3.8"
+services:
+  nginx:
+    image: nginx
+    build:
+      context: ./requirements/nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    command: ["nginx", "-g", "daemon off;"]
+    restart: unless-stopped
+  wordpress:
+    image: wordpress
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress
+    networks:
+      - inception
+    command: ["php-fpm81", "-F"]
+    restart: unless-stopped
+  mariadb:
+    image: mariadb
+    build:
+      context: ./requirements/mariadb
+    container_name: mariadb
+    networks:
+      - inception
+    command: ["mysqld_safe"]
+    restart: unless-stopped
+networks:
+  inception:
