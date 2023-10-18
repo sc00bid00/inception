@@ -7,11 +7,11 @@ RUN apk update &&\
 # access and error logs
 RUN mkdir -p /var/log/nginx
 
-COPY ./nginx_conf/default /etc/nginx/http.d/default.conf
-COPY ./nginx_conf/index.html /var/www/localhost/index.html
+COPY ./conf.d/default /etc/nginx/http.d/default.conf
+COPY ./conf.d/index.html /var/www/localhost/index.html
 
 # Expose ports for HTTP and HTTPS
-EXPOSE 80 443
+EXPOSE 443 9000
 
 # Start Nginx - thanks cgtp ;-)
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    ports:
+      - "443:443"
+    networks:
+      - inception
+    command: ["nginx", "-g", "daemon off;"]
+  wordpress:
+    build:
+      context: ./wordpress
+    container_name: wordpress
+    networks:
+      - inception
+    command: ["php-fpm81", "-F"]
+networks:
+  inception:
