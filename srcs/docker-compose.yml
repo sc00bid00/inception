@@ -13,6 +13,7 @@ services:
       - inception
     command: ["nginx", "-g", "daemon off;"]
     restart: unless-stopped
+
   wordpress:
     image: wordpress
     build:
@@ -20,8 +21,14 @@ services:
     container_name: wordpress
     networks:
       - inception
+    env_file:
+      - .env
+    volumes:
+      - wordpress_db_data:/var/lib/mysql
+      - wordpress_website:/var/www/html
     command: ["php-fpm81", "-F"]
     restart: unless-stopped
+
   mariadb:
     image: mariadb
     build:
@@ -29,7 +36,17 @@ services:
     container_name: mariadb
     networks:
       - inception
+    env_file:
+      - .env
+    volumes:
+      - wordpress_db_data:/var/lib/mysql
     command: ["mysqld_safe"]
     restart: unless-stopped
+
 networks:
   inception:
+
+volumes:
+  wordpress_db_data:
+  wordpress_website:
+
