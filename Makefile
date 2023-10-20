@@ -1,13 +1,15 @@
 SRC=./srcs/docker-compose.yml
 
 all up:
-	docker-compose -f $(SRC) --project-name inception up --build -d
+	docker-compose -f $(SRC) up --build -d
 stop:
-	docker-compose stop nginx
-	docker-compose stop wordpress
+	docker-compose -f $(SRC) stop nginx
+	docker-compose -f $(SRC) stop wordpress
+	docker-compose -f $(SRC) stop mariadb
 start:
-	docker-compose start nginx
-	docker-compose start wordpress
+	docker-compose -f $(SRC) start nginx
+	docker-compose -f $(SRC) start wordpress
+	docker-compose -f $(SRC) start mariadb
 clean down:
 	@if [ $$(docker container ls -q 2>/dev/null | wc -l) -ne 0 ]; then \
 		docker-compose -f $(SRC) down -v; \
@@ -23,7 +25,7 @@ fclean:
 		docker volume rm -f $$(docker volume ls -q); \
 	fi
 	@if [ $$(docker network ls -q 2>/dev/null | wc -l) -ge 4 ]; then \
-		docker network rm -f inception_inception; \
+		docker network rm -f srcs_inception; \
 	fi
 
 re: fclean all
