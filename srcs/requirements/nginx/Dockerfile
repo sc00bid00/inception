@@ -1,19 +1,20 @@
-# Use the Alpine Linux base image
-FROM alpine:latest
+FROM debian:buster
 
-# RUN apk update &&\
-# 	apk --no-cache add nginx
-RUN apk update && \
-	apk --no-cache add nginx &&\
-	mkdir -p /var/log/nginx -p /etc/nginx/certificates
+RUN apt update -y &&\
+	apt upgrade -y &&\
+	apt install nginx -y &&\
+	apt install nano -y &&\
+	apt install curl -y &&\
+	alias ll="ls -la" &&\
+	mkdir -p /etc/nginx/ssl &&\
+	apt install openssl -y &&\
+	openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/nginx/ssl/inception.key -subj "/C=DE/ST=BW/L=Heilbronn/O=42/OU=42/CN=lsordo.42.fr/UID=lsordo" &&\
+	mkdir -p /var/run/nginx
 
-COPY ./conf.d/default.conf /etc/nginx/http.d/default.conf
-COPY ./conf.d/index.html /var/www/localhost/index.html
-COPY ./conf.d/my_cert.crt /etc/nginx/certificates/my_cert.crt
-COPY ./conf.d/my_unencrypted_key.key /etc/nginx/certificates/my_unencrypted_key.key
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Expose ports for HTTP and HTTPS
-EXPOSE 443 9000
+RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
-# Start Nginx - thanks cgtp ;-)
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 443
+
+CMD [ "nginx","-g","daemon off;" ]

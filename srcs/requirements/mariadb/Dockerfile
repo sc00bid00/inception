@@ -1,17 +1,9 @@
-# Use Alpine Linux as the base image
-FROM alpine:latest
+FROM debian:buster
 
-# Set environment variables
+RUN alias ll="ls -la" &&\
+	apt update -y &&\
+	apt upgrade -y &&\
+	apt install nano -y &&\
+	apt-get install mariadb-server -y
 
-
-# Install MariaDB and create necessary directories
-RUN apk --no-cache add mariadb mariadb-client && \
-    mkdir -p /run/mysqld && \
-    mkdir -p /var/lib/mysql && \
-    chown -R mysql:mysql /run/mysqld /var/lib/mysql
-
-# Initialize MariaDB data directory
-RUN mysql_install_db --user=mysql --ldata=/var/lib/mysql
-
-# Expose the MariaDB port
-EXPOSE 3306
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
