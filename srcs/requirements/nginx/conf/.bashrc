@@ -16,4 +16,3 @@ alias l='ls $LS_OPTIONS -lA'
 # alias rm='rm -i'
 # alias cp='cp -i'
 # alias mv='mv -i'
-source /home/$USER/wp.completion.bash

@@ -11,6 +11,7 @@ RUN apt update -y &&\
 	mkdir -p /var/run/nginx
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/.bashrc /root/.bashrc
 
 RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
