@@ -15,8 +15,8 @@ clean down:
 		docker-compose -f $(SRC) down -v; \
 	fi
 fclean:
-	@if [ $$(docker container ls -q 2>/dev/null | wc -l) -ne 0 ]; then \
-		docker container rm -f $$(docker container ls -q); \
+	@if [ $$(docker container ls -aq 2>/dev/null | wc -l) -ne 0 ]; then \
+		docker container rm -f $$(docker container ls -aq); \
 	fi
 	@if [ $$(docker image ls -q 2>/dev/null | wc -l) -ne 0 ]; then \
 		docker image prune -af; \

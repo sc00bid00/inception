@@ -1,6 +1,6 @@
 #!/bin/bash
-sleep 10
-wordpress_dir=/
+sleep 60
+wordpress_dir=/var/www/wordpress
 if [ ! -f "$wordpress_dir/wp-config.php" ]; then
 	wp config create	--allow-root \
 						--dbname=$SQL_DATABASE \

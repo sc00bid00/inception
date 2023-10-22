@@ -6,10 +6,11 @@ RUN	apt update &&\
 	apt upgrade &&\
 	apt-get install -y nano &&\
 	apt-get install -y wget &&\
-	apt-get install -y	php7.3\
-	php-fpm\
-	php-mysql\
-	mariadb-client
+	apt-get install -y php7.3 &&\
+	apt-get install -y dnsutils &&\
+	apt-get install -y php-fpm &&\
+	apt-get install -y php-mysql &&\
+	apt-get install -y mariadb-client
 
 RUN	wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/www
 RUN	cd /var/www && tar -xzf wordpress-6.0-fr_FR.tar.gz && rm wordpress-6.0-fr_FR.tar.gz
@@ -23,4 +24,6 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 
 COPY ./conf/autoconfig.sh /var/www/wordpress/autoconfig.sh
 RUN chmod +x /var/www/wordpress/autoconfig.sh
-ENTRYPOINT [ "/var/www/wordpress/autoconfig.sh" ]
+RUN mkdir -p /run/php
+EXPOSE 9000
+CMD [ "/var/www/wordpress/autoconfig.sh" ]
