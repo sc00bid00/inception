@@ -25,5 +25,4 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 COPY ./conf/autoconfig.sh /var/www/wordpress/autoconfig.sh
 RUN chmod +x /var/www/wordpress/autoconfig.sh
 RUN mkdir -p /run/php
-EXPOSE 9000
 CMD [ "/var/www/wordpress/autoconfig.sh" ]

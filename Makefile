@@ -1,7 +1,11 @@
 SRC=./srcs/docker-compose.yml
+MDB_DIR = ~/data/mariadb
+WPR_DIR = ~/data/wordpress
 
 all up:
-	docker-compose -f $(SRC) up --build -d
+	@if [ ! -d "$(MDB_DIR)" ]; then mkdir -p $(MDB_DIR); fi
+	@if [ ! -d "$(WPR_DIR)" ]; then mkdir -p $(WPR_DIR); fi
+	docker-compose -f $(SRC) up --build
 stop:
 	docker-compose -f $(SRC) stop nginx
 	docker-compose -f $(SRC) stop wordpress
@@ -25,8 +29,15 @@ fclean:
 		docker volume rm -f $$(docker volume ls -q); \
 	fi
 	@if [ $$(docker network ls -q 2>/dev/null | wc -l) -ge 4 ]; then \
-		docker network rm -f srcs_inception; \
+		docker network rm srcs_inception; \
 	fi
+
+sclean:
+	rm -rf $(MDB_DIR)
+	rm -rf $(WPR_DIR)
+
+dozer:
+	docker system prune -af
 
 re: fclean all
 

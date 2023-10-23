@@ -1,20 +1,21 @@
 #!/bin/bash
+service mariadb start;
 
-# Start the MariaDB service
-service mysql start
+while ! mysqladmin ping --silent; do
+	sleep 1
+done
 
-# # Wait for MariaDB to start
-sleep 10
-
-# Set the root password
-mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;" || { echo "Failed to create database"; exit 1; }
-mysql -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';" || { echo "Failed to create user"; exit 2; }
-mysql -e "GRANT ALL PRIVILEGES ON \`${SQL_DATABASE}\`.* TO \`${SQL_USER}\`@'%' IDENTIFIED BY '${SQL_PASSWORD}';" || { echo "Failed to grant privileges"; exit 3; }
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';" || { echo "Failed to change root password"; exit 4; }
-# mysql -e "FLUSH PRIVILEGES;" || { echo "Failed to flush privileges"; exit 5; }
-
-# Shutdown the MariaDB server
-mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
-
-# Start MariaDB safely
+echo "Create database"
+mariadb -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
+echo "Create user"
+mariadb -e "CREATE USER IF NOT EXISTS $MYSQL_USER@'localhost' IDENTIFIED BY $MYSQL_PASSWORD;"
+echo "Grant rpivileges"
+mariadb -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO $MYSQL_USER@'%' IDENTIFIED BY $MYSQL_PASSWORD;"
+echo "Grant privileges"
+mariadb -e "ALTER USER 'root'@'localhost' IDENTIFIED BY $MYSQL_ROOT_PASSWORD;"
+echo "Flush"
+mariadb -e "FLUSH PRIVILEGES;"
+echo "Shutdown"
+mysqladmin -u root -p$MYSQL_ROOT_PASSWORD shutdown
+echo "Start-up again"
 exec mysqld_safe
