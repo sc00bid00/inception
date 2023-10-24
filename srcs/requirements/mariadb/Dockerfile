@@ -7,7 +7,6 @@ RUN apt update -y &&\
 
 COPY /conf/.bashrc /root/.bashrc
 COPY /conf/mariadb.cnf /etc/mysql/mariadb.cnf
-# COPY /conf/mariadb.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY /conf/launch.sh /launch.sh
 
 RUN chmod +x /launch.sh

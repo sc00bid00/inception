@@ -32,6 +32,11 @@ fclean:
 		docker network rm srcs_inception; \
 	fi
 
+vclean:
+	@if [ $$(docker volume ls -q 2>/dev/null | wc -l) -ne 0 ]; then \
+		docker rm -f $$(docker container ls -aq);\
+		docker volume rm -f $$(docker volume ls -q); \
+	fi
 sclean:
 	rm -rf $(MDB_DIR)
 	rm -rf $(WPR_DIR)
