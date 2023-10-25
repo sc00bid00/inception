@@ -11,4 +11,5 @@ COPY /conf/launch.sh /launch.sh
 
 RUN chmod +x /launch.sh
 
-CMD [ "/launch.sh" ]
+CMD [ "./launch.sh" ]
+# CMD [ "bash" ]

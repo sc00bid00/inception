@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:11
 
 RUN apt update -y &&\
 	apt upgrade -y &&\
@@ -11,7 +11,8 @@ RUN apt update -y &&\
 	mkdir -p /var/run/nginx
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
-COPY conf/hosts /etc/hosts
+COPY conf/hosts /etc/hosta
+COPY conf/hosts /etc/
 COPY conf/.bashrc /root/.bashrc
 
 RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
