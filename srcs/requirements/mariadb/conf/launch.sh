@@ -1,4 +1,5 @@
 #!/bin/bash
+sleep 3
 service mariadb start;
 while ! mysqladmin ping --silent; do
 	sleep 1
