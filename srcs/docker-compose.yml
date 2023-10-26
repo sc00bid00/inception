@@ -5,15 +5,15 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/$USER/inception/data/wordpress'
-      # device: '/Users/$USER/data/wordpress'
+      # device: '/home/$USER/inception/data/wordpress'
+      device: '/Users/$USER/inception/data/wordpress'
   md:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/home/$USER/inception/data/mariadb'
-      # device: '/Users/$USER/data/mariadb'
+      # device: '/home/$USER/inception/data/mariadb'
+      device: '/Users/$USER/inception/data/mariadb'
 
 networks:
   inception:
