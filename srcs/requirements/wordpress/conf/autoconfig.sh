@@ -14,8 +14,8 @@ if [ ! -f "wp-config.php" ]; then
 	echo "Install and activate new theme"
 	wp theme install inspiro --allow-root --activate
 	echo "Name blog and tagline"
-	wp option update blogname --allow-root '42 Inception'
-	wp option update blogdescription --allow-root 'Driving containers with Docker'
+	#wp option update blogname --allow-root '42 Inception'
+	#wp option update blogdescription --allow-root 'Driving containers with Docker'
 	echo "Delete inactive plugins and themes"
 	wp plugin delete --allow-root $(wp plugin list --allow-root --status=inactive --field=name)
 	wp theme delete --allow-root $(wp theme list --allow-root --status=inactive --field=name)
