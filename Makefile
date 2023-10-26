@@ -1,6 +1,6 @@
 SRC=./srcs/docker-compose.yml
-MDB_DIR = ./data/mariadb
-WPR_DIR = ./data/wordpress
+MDB_DIR = home/$(USER)/data/mariadb
+WPR_DIR = home/$(USER)/data/wordpress
 
 all up:
 	@if [ ! -d "$(MDB_DIR)" ]; then mkdir -p $(MDB_DIR); fi
