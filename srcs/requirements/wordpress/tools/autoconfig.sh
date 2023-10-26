@@ -9,8 +9,8 @@ if [ ! -f "wp-config.php" ]; then
 	echo "Create wp user"
 	wp user create $WP_USER other@student.42heilbronn.de --user_pass=$WP_USER_PW --allow-root
 	echo "Change url address"
-	wp option update home --allow-root 'https://lsordo.42.fr'
-	wp option update siteurl --allow-root 'https://lsordo.42.fr'
+	wp option update home --allow-root "https://$(DOMAIN_NAME)"
+	wp option update siteurl --allow-root "https://$(DOMAIN_NAME)"
 	echo "Install and activate new theme"
 	wp theme install inspiro --allow-root --activate
 	echo "Name blog and tagline"

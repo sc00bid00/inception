@@ -15,7 +15,7 @@ RUN cd /var/www && unzip latest.zip && rm latest.zip
 # install wordpress cli
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&\
 	chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
-COPY ./conf/autoconfig.sh /var/www/wordpress/autoconfig.sh
+COPY ./tools/autoconfig.sh /var/www/wordpress/autoconfig.sh
 RUN chmod +x /var/www/wordpress/autoconfig.sh
 RUN mkdir -p /run/php
 

@@ -5,7 +5,7 @@ RUN apt-get -y update && apt-get -y upgrade
 # minimum requirement
 RUN apt-get -y install mariadb-server
 COPY /conf/mariadb.cnf /etc/mysql/mariadb.cnf
-COPY /conf/launch.sh /launch.sh
+COPY /tools/launch.sh /launch.sh
 RUN chmod +x /launch.sh
 
 CMD [ "./launch.sh" ]
