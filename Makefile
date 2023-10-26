@@ -1,19 +1,11 @@
 SRC=./srcs/docker-compose.yml
-MDB_DIR = ~/data/mariadb
-WPR_DIR = ~/data/wordpress
+MDB_DIR = ./data/mariadb
+WPR_DIR = ./data/wordpress
 
 all up:
 	@if [ ! -d "$(MDB_DIR)" ]; then mkdir -p $(MDB_DIR); fi
 	@if [ ! -d "$(WPR_DIR)" ]; then mkdir -p $(WPR_DIR); fi
 	docker-compose -f $(SRC) up --build
-stop:
-	docker-compose -f $(SRC) stop nginx
-	docker-compose -f $(SRC) stop wordpress
-	docker-compose -f $(SRC) stop mariadb
-start:
-	docker-compose -f $(SRC) start nginx
-	docker-compose -f $(SRC) start wordpress
-	docker-compose -f $(SRC) start mariadb
 clean down:
 	@if [ $$(docker container ls -q 2>/dev/null | wc -l) -ne 0 ]; then \
 		docker-compose -f $(SRC) down -v; \
@@ -32,16 +24,19 @@ fclean:
 		docker network rm srcs_inception; \
 	fi
 
+# cleans volumes, leaves local files
 vclean:
 	@if [ $$(docker volume ls -q 2>/dev/null | wc -l) -ne 0 ]; then \
 		docker rm -f $$(docker container ls -aq);\
 		docker volume rm -f $$(docker volume ls -q); \
 	fi
-sclean:
-	rm -rf $(MDB_DIR)
-	rm -rf $(WPR_DIR)
 
-dozer:
+# rm local files
+sclean:
+	sudo rm -rf ./data
+
+# total erasure == nuclear attack
+dozer: fclean sclean
 	docker system prune -af
 
 re: fclean all

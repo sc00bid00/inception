@@ -1,15 +1,15 @@
 FROM debian:11
 
-RUN apt update -y &&\
-	apt upgrade -y &&\
-	apt install nano -y &&\
-	apt-get -y install mariadb-server
+RUN apt-get -y update && apt-get -y upgrade
 
-COPY /conf/.bashrc /root/.bashrc
+# minimum requirement
+RUN apt-get -y install mariadb-server
 COPY /conf/mariadb.cnf /etc/mysql/mariadb.cnf
 COPY /conf/launch.sh /launch.sh
-
 RUN chmod +x /launch.sh
 
 CMD [ "./launch.sh" ]
-# CMD [ "bash" ]
+
+# nice to have for debug
+# RUN apt-get -y install nano dnsutils
+# COPY /conf/.bashrc /root/.bashrc

@@ -1,29 +1,27 @@
-FROM debian:10
+FROM debian:11
 
-COPY ./conf/.bashrc /root/.bashrc
+RUN	apt-get update && apt-get upgrade
 
-RUN	apt update &&\
-	apt upgrade &&\
-	apt-get install -y nano &&\
-	apt-get install -y wget &&\
-	apt-get install -y php7.3 &&\
-	apt-get install -y dnsutils &&\
-	apt-get install -y php-fpm &&\
-	apt-get install -y php-mysql &&\
-	apt-get install -y mariadb-client
+# minimum required
+RUN	apt-get install -y wget unzip php7.4 php-fpm php-mysql mariadb-client
+# debug site health
+RUN apt-get install -y php-gd curl php-dom php-imagick php-mbstring php-zip php-intl
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-RUN	wget https://fr.wordpress.org/wordpress-6.0-fr_FR.tar.gz -P /var/www
-RUN	cd /var/www && tar -xzf wordpress-6.0-fr_FR.tar.gz && rm wordpress-6.0-fr_FR.tar.gz
-RUN	chown -R root:root /var/www/wordpress
+# install wordpress
+RUN	wget https://wordpress.org/latest.zip -P /var/www
+RUN cd /var/www && unzip latest.zip && rm latest.zip
 
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
-
+# install wordpress cli
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar &&\
-	chmod +x wp-cli.phar &&\
-	mv wp-cli.phar /usr/local/bin/wp
-
+	chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp
 COPY ./conf/autoconfig.sh /var/www/wordpress/autoconfig.sh
 RUN chmod +x /var/www/wordpress/autoconfig.sh
 RUN mkdir -p /run/php
+
 CMD [ "/var/www/wordpress/autoconfig.sh" ]
-# CMD [ "bash" ]
+
+# nice to have for debug
+# RUN apt-get install -y dnsutils nano
+# COPY ./conf/.bashrc /root/.bashrc
+
