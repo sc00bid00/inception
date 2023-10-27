@@ -7,7 +7,7 @@ if [ ! -f "wp-config.php" ]; then
 	echo "Create wp admin"
 	wp core install --url=lsordo.42.fr --title="Inception" --admin_name=$WP_ADMIN --admin_password=$WP_ADMIN_PW --admin_email=lsordo@student.42heilbronn.de --allow-root
 	echo "Create wp user"
-	wp user create $WP_USER other@student.42heilbronn.de --user_pass=$WP_USER_PW --allow-root
+	wp user create $WP_USER normal@student.42heilbronn.de --user_pass=$WP_USER_PW --allow-root
 	echo "Change url address"
 	wp option update home --allow-root "https://lsordo.42.fr"
 	wp option update siteurl --allow-root "https://lsordo.42.fr"
