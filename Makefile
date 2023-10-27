@@ -1,14 +1,14 @@
 SRC=./srcs/docker-compose.yml
-MDB_DIR = home/$(USER)/data/mariadb
-WPR_DIR = home/$(USER)/data/wordpress
+MDB_DIR = $(HOME)/data/mariadb
+WPR_DIR = $(HOME)/data/wordpress
 
 all up:
 	@if [ ! -d "$(MDB_DIR)" ]; then mkdir -p $(MDB_DIR); fi
 	@if [ ! -d "$(WPR_DIR)" ]; then mkdir -p $(WPR_DIR); fi
-	docker-compose -f $(SRC) up --build
+	docker compose -f $(SRC) up --build
 clean down:
 	@if [ $$(docker container ls -q 2>/dev/null | wc -l) -ne 0 ]; then \
-		docker-compose -f $(SRC) down -v; \
+		docker compose -f $(SRC) down -v; \
 	fi
 fclean:
 	@if [ $$(docker container ls -aq 2>/dev/null | wc -l) -ne 0 ]; then \
@@ -33,7 +33,7 @@ vclean:
 
 # rm local files
 sclean:
-	sudo rm -rf ./data
+	sudo rm -rf $(HOME)/data
 
 # total erasure == nuclear attack
 dozer: fclean sclean
