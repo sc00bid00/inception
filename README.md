@@ -11,11 +11,11 @@ Inception Logo <!-- If you have a project logo, you can include it here -->
 
 Inception is a Docker-based project that focuses on composing three containers to create a networked simulation of a WordPress website. It explores several key areas, including:
 
-    Docker containerization and management
-    Networking concepts within Docker
-    Understanding the architecture of WordPress and its components
-    Deployment of a MariaDB database
-    Setting up an Nginx web server
+- Docker containerization and management
+- Networking concepts within Docker
+- Understanding the architecture of WordPress and its components
+- Deployment of a MariaDB database
+- Setting up an Nginx web server
 
 ## Learning Objectives
 
