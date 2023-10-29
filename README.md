@@ -74,6 +74,8 @@ cd <you_local_folder>
 make down
 ```
 
+`make dozer` if you need to really start form scratch again.
+
 Despite not being sure on functionality, a develop branch contains lots of interesting stuff for debugging, included some bash scripts that have spared me hours of painful tipping on the keyboard, or at least they should have.
 
 ## Acknowledgement and credits
