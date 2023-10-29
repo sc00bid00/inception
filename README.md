@@ -1,9 +1,6 @@
 # Inception Project README
 
-Inception Logo <!-- If you have a project logo, you can include it here -->
-
-
-## Welcome to the Inception project repository! This project was developed as a mandatory part of the 42 School curriculum in Heilbronn and was successfully evaluated on Friday, 27th October 2023.
+Welcome to the Inception project repository! This project was developed as a mandatory part of the 42 School curriculum in Heilbronn and was successfully evaluated on Friday, 27th October 2023.
 
 ### lsordo@student.42heilbronn.de
 
