@@ -76,11 +76,10 @@ Despite not being sure on functionality, a develop branch contains lots of inter
 ## Acknowledgement and credits
 A big thank you as always to the 42 School in Heilbronn for the opportunity to work on this project and gain valuable skills in Docker, networking, WordPress, MariaDB, and Nginx.
 
-Thank You to Rouven, Franziska and Max: Your generosity is incredible, and I love you.
+Thank You (abc order) Franziska, Max and Rouven: Your generosity is unmatchable, I love you.
+Thank You Kathrin, not being alone in the darkest moments is of great confort.
 
-Thank You to Kathrin, knowing not to be alone is of great confort in the dark moments.
-
-Thank You tomy three evaluators: it was getting late on Friday evening, but you committed and went through the evaluation with great attention and in detail. Really apreaciate your professionalism.
+Thank You to my three evaluators: slakner, fkhodara, fgabler - it was getting late on Friday evening, but you committed and went through the evaluation with great attention and detail. Really apreaciate your professionalism. As usual, we learn until the very last second.
 
 ## License
 This project is open source and available under the GNU License.
