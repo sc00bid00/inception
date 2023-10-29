@@ -5,56 +5,59 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/Users/$USER/data/wordpress'
+      device: '/home/$USER/data/wordpress'
   md:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/Users/$USER/data/mariadb'
+      device: '/home/$USER/data/mariadb'
 
 networks:
   inception:
-    driver: bridge
 
 services:
   mariadb:
-    container_name: mariadb
-    networks:
-      inception:
     build:
       context: requirements/mariadb
-    env_file: .env
+    image: mariadb
+    container_name: mariadb
     volumes:
       - md:/var/lib/mysql
+    networks:
+      inception:
+    env_file: .env
     restart: unless-stopped
 
   nginx:
+    build:
+      context: requirements/nginx
+    image: nginx
     container_name: nginx
+    depends_on:
+      - mariadb
+      - wordpress
     volumes:
       - wp:/var/www/wordpress
     networks:
       inception:
-    depends_on:
-      - wordpress
-    build:
-      context: requirements/nginx
-    env_file: .env
     ports:
       - "443:443"
+    env_file: .env
     restart: on-failure
 
   wordpress:
+    build:
+      context: requirements/wordpress
+    image: wordpress
     container_name: wordpress
-    env_file: .env
     volumes:
       - wp:/var/www/wordpress
     networks:
       inception:
-    build:
-      context: requirements/wordpress
+    env_file: .env
+    restart: on-failure
     depends_on:
       - mariadb
-    restart: on-failure
 
 
