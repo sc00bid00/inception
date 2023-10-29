@@ -56,17 +56,17 @@ Also personalize all files in the repository, i.e. passwords in the .env file (i
 
 ### Start
 Launch a shell and:
-`git clone <repository_url> <your_local_folder>
+``git clone <repository_url> <your_local_folder>
 cd <your_local_folder>
-make`
+make``
 
 Open a browser on the host (likely the virtual machine):
-https://your_domain:443
+`https://your_domain:443`
 
 ### Stop
 Launch another shell and
-`cd <you_local_folder>
-make down`
+``cd <you_local_folder>
+make down``
 
 Despite not being sure on functionality, a develop branch contains lots of interesting stuff for debugging, included some bash scripts that have spared me hours of painful tipping on the keyboard, or at least they should have.
 
