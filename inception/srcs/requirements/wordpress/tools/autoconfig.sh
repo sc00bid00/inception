@@ -1,4 +1,10 @@
 #!/bin/bash
+# always remember the --allow-root flag for every wp cli command. unless you create ad execute as a non privileged user
+# change specific data according to you situation
+# remmber to integrate /etc/hosts accordingly
+# installation of new theme and removal of unnecessary themes and plugins is smart but not required and can be omitted
+# basing on experience if wordpress is executed before mariadb then you are screwed
+
 sleep 10
 cd /var/www/wordpress
 if [ ! -f "wp-config.php" ]; then

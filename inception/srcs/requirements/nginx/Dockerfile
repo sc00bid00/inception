@@ -13,3 +13,7 @@ COPY conf/nginx.conf /etc/nginx/sites-enabled/default
 RUN chmod 755 /var/www/html && chown -R www-data:www-data /var/www/html
 
 CMD [ "nginx","-g","daemon off;" ]
+
+# for debug purpose also useful to have nano, dnsutils, net-tools and the coloured bash prompts with recurrent aliases installed
+# omitted here for essentiality
+

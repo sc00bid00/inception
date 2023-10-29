@@ -1,6 +1,8 @@
 SRC=./srcs/docker-compose.yml
-MDB_DIR = $(HOME)/data/mariadb
-WPR_DIR = $(HOME)/data/wordpress
+# checkout the subject and teh system you are working with to be sure that the local data are put in the right directory
+DATA_DIR = $(HOME)/data
+MDB_DIR = $(DATA_DIR)/mariadb
+WPR_DIR = $(DATA_DIR)/wordpress
 
 all up:
 	@if [ ! -d "$(MDB_DIR)" ]; then mkdir -p $(MDB_DIR); fi
@@ -33,7 +35,7 @@ vclean:
 
 # rm local files
 sclean:
-	sudo rm -rf $(HOME)/data
+	sudo rm -rf $(DATA_DIR)
 
 # total erasure == nuclear attack
 dozer: fclean sclean

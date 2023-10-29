@@ -20,3 +20,6 @@ RUN chmod +x /var/www/wordpress/autoconfig.sh
 RUN mkdir -p /run/php
 
 CMD [ "/var/www/wordpress/autoconfig.sh" ]
+
+# for debug purpose also useful to have nano, dnsutils, net-tools and the coloured bash prompts with recurrent aliases installed
+# omitted here for essentiality

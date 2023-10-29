@@ -1,4 +1,5 @@
 version: '3'
+# check subject and system to confirm that local volumes are mounted where required
 volumes:
   wp:
     driver: local
