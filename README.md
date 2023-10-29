@@ -2,7 +2,7 @@
 
 Welcome to the Inception project repository! This project was developed as a mandatory part of the 42 School curriculum in Heilbronn and was successfully evaluated on Friday, 27th October 2023.
 
-### lsordo@student.42heilbronn.de
+lsordo@student.42heilbronn.de
 
 ## Project Overview
 
